@@ -222,7 +222,7 @@ def create_input_source(
         else:
             if isinstance(source, str):
                 location = source
-            elif isinstance(source, pathlib.Path):
+            elif isinstance(source, pathlib.PurePath):
                 location = str(source)
             elif isinstance(source, bytes):
                 data = source

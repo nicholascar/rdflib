@@ -19,6 +19,7 @@ from rdflib.exceptions import ParserError
 import os
 import shutil
 import tempfile
+import pathlib
 
 from io import BytesIO
 from urllib.parse import urlparse
@@ -990,7 +991,10 @@ class Graph(Node):
             stream = destination
             serializer.serialize(stream, base=base, encoding=encoding, **args)
         else:
-            location = destination
+            if isinstance(destination, pathlib.PurePath):
+                location = str(destination)
+            else:
+                location = destination
             scheme, netloc, path, params, _query, fragment = urlparse(location)
             if netloc != "":
                 print(
